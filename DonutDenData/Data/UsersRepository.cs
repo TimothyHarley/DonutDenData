@@ -28,7 +28,7 @@ namespace DonutDenData.Data
                         newUserObj.Email,
                         newUserObj.PhoneNumber,
                         newUserObj.IsAdmin,
-                        newUserObj.isDeleted
+                        newUserObj.IsDeleted
                     });
                 if(newUserQuery != null)
                 {
@@ -41,7 +41,54 @@ namespace DonutDenData.Data
 
         public IEnumerable<Users> GetAllUsers()
         {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Users>("select * from users");
+            }
+        }
 
+        public IEnumerable<Users> GetSingleUser(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Users>("select * from users where users.Id = @id", new { id });
+            }
+        }
+
+        public Users UpdateUser(Users userToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updateUserQuery = @"update users
+                                      Set FirstName = @firstName,
+                                      LastName = @lastName,
+                                      Email = @email,
+                                      IsAdmin = @isAdmin"
+                var rowsAffected = db.Execute(updateUserQuery, userToUpdate);
+
+                if (rowsAffected == 1)
+                {
+                    return userToUpdate;
+                }
+                throw new Exception("Failed to update user");
+            }
+        }
+
+        public void DeleteUser(int id)
+        {
+            using (var db =  new SqlConnection(ConnectionString))
+            {
+                var deleteUserQuery = @"Update Users
+                                        Set isDeleted = 1
+                                        Where id = @id";
+
+                var rowsAffected = db.Execute(deleteUserQuery, new { id });
+                
+                if (rowsAffected != 1)
+                {
+                    throw new Exception("Failed to delete user");
+                }
+            }
         }
     }
 }
