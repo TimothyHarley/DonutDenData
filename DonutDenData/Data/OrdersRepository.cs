@@ -45,8 +45,60 @@ namespace DonutDenData.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var orderByDateQuery = "select * from Orders where Orders"
+                var orderByDateQuery = "select * from Orders where Orders.pickupDate = @date and Orders.isDeleted = 0";
+
+                return db.Query<Orders>(orderByDateQuery, new { date });
             }
+        }
+
+        public Orders GetSingleOrder(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                return db.QueryFirstOrDefault<Orders>("select * from Orders where Order.Id = @id", new { id });
+            }
+        }
+
+        public Orders UpdateOrder(Orders OrderToUpdate)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updateOrderQuery = @"Update Orders
+                                        Set FirstName = @firstName,
+                                        LastName = @lastName,
+                                        Email = @email,
+                                        PhoneNumber = @phoneNumber,
+                                        PickupDate = @pickupDate,
+                                        PickupTime = @pickupTime,
+                                        IsApproved = @isApproved,
+                                        ApprovedBy = @approvedBy,
+                                        IsDeleted = @isDeleted";
+                var rowsAffected = db.Execute(updateOrderQuery, OrderToUpdate);
+
+                if(rowsAffected == 1)
+                {
+                    return OrderToUpdate;
+                }
+                throw new Exception("Failed to update your order");
+            }
+        }
+
+        public void DeleteOrder(int id)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var updateOrderQuery = @"Update Order
+                                        Set isDeleted = 1
+                                        Where id = @id";
+
+                var rowsAffected = db.Execute(updateOrderQuery, new { id });
+
+                if(rowsAffected != 1)
+                {
+                    throw new Exception("Failed to delete your order");
+                }
+            }
+
         }
     }
 }
