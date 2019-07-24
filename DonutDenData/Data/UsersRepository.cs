@@ -63,7 +63,7 @@ namespace DonutDenData.Data
                                       Set FirstName = @firstName,
                                       LastName = @lastName,
                                       Email = @email,
-                                      IsAdmin = @isAdmin"
+                                      IsAdmin = @isAdmin";
                 var rowsAffected = db.Execute(updateUserQuery, userToUpdate);
 
                 if (rowsAffected == 1)
