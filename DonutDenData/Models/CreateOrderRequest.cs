@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 
 namespace DonutDenData.Models
 {
-    public class Users
+    public class CreateOrderRequest
     {
-        public int Id { get; set; }
-        public string FirebaseId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public bool IsAdmin { get; set; }
+        public DateTime PickupDate { get; set; }
+        public DateTime PickupTime { get; set; }
+        public bool IsApproved { get; set; }
+        public int ApprovedBy { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
