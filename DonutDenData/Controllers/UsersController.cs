@@ -50,7 +50,7 @@ namespace DonutDenData.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateUser(int id, Users userToUpdate)
         {
-            if (id != userToUpdate.id)
+            if (id != userToUpdate.Id)
             {
                 return BadRequest(new { error = "There was an error in your update request." });
             }
@@ -59,12 +59,12 @@ namespace DonutDenData.Controllers
             return Ok(updatedUser);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("delete-user/{id}")]
         public ActionResult DeleteUser(int id)
         {
             _usersRepository.DeleteUser(id);
 
-            return Ok("User has been deleted");
+            return NoContent();
         }
     }
 }
