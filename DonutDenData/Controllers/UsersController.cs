@@ -64,7 +64,7 @@ namespace DonutDenData.Controllers
         {
             _usersRepository.DeleteUser(id);
 
-            return NoContent();
+            return Ok("Deleted User");
         }
     }
 }

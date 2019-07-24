@@ -64,7 +64,7 @@ namespace DonutDenData.Controllers
         {
             _ordersRepository.DeleteOrder(id);
 
-            return NoContent();
+            return Ok("Deleted Order");
         }
     }
 }
