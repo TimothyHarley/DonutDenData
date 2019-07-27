@@ -10,7 +10,7 @@ namespace DonutDenData.Data
 {
     public class OrderItemsRepository
     {
-        const string ConnectionString = "Server=localhost; Database=PartingPets; Trusted_Connection=True;";
+        const string ConnectionString = "Server=localhost; Database=DonutDen; Trusted_Connection=True;";
 
         public OrderItem AddOrderItem(CreateOrderItemRequest newOrderItemObj)
         {

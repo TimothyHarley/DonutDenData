@@ -10,7 +10,7 @@ namespace DonutDenData.Data
 {
     public class CookTypeRepository
     {
-        const string ConnectionString = "Server=localhost; Database=PartingPets; Trusted_Connection=True;";
+        const string ConnectionString = "Server=localhost; Database=DonutDen; Trusted_Connection=True;";
 
         public CookType AddCookType(CreateCookTypeRequest newCookTypeObj)
         {
