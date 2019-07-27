@@ -23,7 +23,7 @@ namespace DonutDenData.Controllers
             _validator = new OrdersRequestValidator();
         }
 
-        [HttpGet("{date}")]
+        [HttpGet("order-date/{date}")]
         public ActionResult GetOrdersByDate(DateTime date)
         {
             return Ok(_ordersRepository.GetOrdersByDate(date));

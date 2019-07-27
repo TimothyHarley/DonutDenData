@@ -10,7 +10,7 @@ namespace DonutDenData.Data
 {
     public class OrdersRepository
     {
-        const string ConnectionString = "Server=localhost; Database=PartingPets; Trusted_Connection=True;";
+        const string ConnectionString = "Server=localhost; Database=DonutDen; Trusted_Connection=True;";
 
         public Orders AddOrder(CreateOrderRequest newOrderObj)
         {
@@ -55,7 +55,7 @@ namespace DonutDenData.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.QueryFirstOrDefault<Orders>("select * from Orders where Order.Id = @id", new { id });
+                return db.QueryFirstOrDefault<Orders>("select * from Orders where Orders.Id = @id", new { id });
             }
         }
 
