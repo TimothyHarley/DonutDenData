@@ -12,7 +12,7 @@ namespace DonutDenData.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime PickupDate { get; set; }
-        public DateTime PickupTime { get; set; }
+        public string PickupTime { get; set; }
         public bool IsApproved { get; set; }
         public int ApprovedBy { get; set; }
         public bool IsDeleted { get; set; }

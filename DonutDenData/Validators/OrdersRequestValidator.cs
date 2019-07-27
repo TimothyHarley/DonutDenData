@@ -15,7 +15,7 @@ namespace DonutDenData.Validators
                 || string.IsNullOrEmpty(requestToValidate.Email)
                 || string.IsNullOrEmpty(requestToValidate.PhoneNumber)
                 || string.IsNullOrEmpty(requestToValidate.PickupDate.ToString())
-                || string.IsNullOrEmpty(requestToValidate.PickupTime.ToString()));
+                || string.IsNullOrEmpty(requestToValidate.PickupTime));
         }
     }
 }
