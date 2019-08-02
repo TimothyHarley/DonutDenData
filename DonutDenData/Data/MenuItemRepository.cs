@@ -32,7 +32,7 @@ namespace DonutDenData.Data
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                return db.QueryFirstOrDefault<MenuItem>("slect * from menuItem where menuItem.id = @id", new { id });
+                return db.QueryFirstOrDefault<MenuItem>("select * from menuItem where menuItem.id = @id", new { id });
             }
         }
     }
