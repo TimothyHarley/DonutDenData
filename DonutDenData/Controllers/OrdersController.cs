@@ -15,11 +15,15 @@ namespace DonutDenData.Controllers
     public class OrdersController : ControllerBase
     {
         readonly OrdersRepository _ordersRepository;
+        readonly MenuItemRepository _menuItemRepository;
+        readonly OrderItemsRepository _orderItemsRepository;
         readonly OrdersRequestValidator _validator;
 
         public OrdersController()
         {
             _ordersRepository = new OrdersRepository();
+            _menuItemRepository = new MenuItemRepository();
+            _orderItemsRepository = new OrderItemsRepository();
             _validator = new OrdersRequestValidator();
         }
 
@@ -46,6 +50,32 @@ namespace DonutDenData.Controllers
 
             return Created($"api/orders/{newOrder.Id}", newOrder);
         }
+
+        //[HttpPost]
+        //public ActionResult CreateOrder(CreateOrderRequest createRequest)
+        //{
+
+        //    var newOrder = _ordersRepository.AddOrder(createRequest);
+        //    if (newOrder == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    // For each object in the array of objects called OrderLines
+        //    // Each object has productId and Quantity
+        //    foreach (var orderItem in createRequest.OrderItems)
+        //    {
+        //        // Gets all the information for a single product since an ID is passed in
+        //        var menuItem = _menuItemRepository.GetSingleMenuItem(orderItem.ItemId);
+        //        // For the OrdersItem table 
+        //        orderItem.OrderId = newOrder.Id;
+        //        // Also for the OrderItem table
+        //        orderItem.UnitPrice = menuItem.Price;
+        //        // Now that the orderItem has all the required fields we're passing it into a method that inserts it into the OrdersLine table
+        //        var orderLineItem = _orderItemsRepository.AddOrderItem(orderItem);
+        //    }
+
+        //    return Created($"api/orders/{newOrder.Id}", newOrder);
+        //}
 
         [HttpPut("{id}")]
         public ActionResult UpdateOrder(int id, Orders orderToUpdate)

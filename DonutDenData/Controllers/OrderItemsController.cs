@@ -36,15 +36,14 @@ namespace DonutDenData.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddOrderItem(CreateOrderItemRequest createOrderItem)
+        public ActionResult AddOrderItem(List<CreateOrderItemRequest> createOrderItem)
         {
-            if (!_validator.Validate(createOrderItem))
-            {
-                return BadRequest(new { error = "empty spots on form" });
-            }
-            var newOrderItem = _orderItemsRepository.AddOrderItem(createOrderItem);
 
-            return Created($"api/orderItems/{newOrderItem.Id}", newOrderItem);
+            foreach (var orderItem in createOrderItem)
+            {
+                var newOrderItem = _orderItemsRepository.AddOrderItem(orderItem);
+            }
+            return Ok(createOrderItem);
         }
 
         [HttpPut("{id}")]
