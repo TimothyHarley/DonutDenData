@@ -48,7 +48,8 @@ namespace DonutDenData.Data
                 var orderByDateQuery = @"select i.id, o.FirstName, o.LastName, o.PickUpDate, o.PickUpTime, o.PhoneNumber, o.Email, o.isDeleted, o.isApproved, o.ApprovedBy, i.Quantity, m.Name, m.Category from Orders o
                                         left join OrderItem i on o.id = i.OrderId
                                         left join MenuItem m on i.ItemId = m.Id
-                                        where o.pickupDate = @date and o.isDeleted = 0";
+                                        where o.pickupDate = @date and o.isDeleted = 0
+                                        order by Name, PickUpTime";
 
                 return db.Query<OrdersForDisplay>(orderByDateQuery, new { date });
             }
