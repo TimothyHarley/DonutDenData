@@ -55,6 +55,18 @@ namespace DonutDenData.Data
             }
         }
 
+        public OrderItemsAndOrders GetOrdersSum(DateTime date)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var ordersSumQuery = @"select sum(Quantity) 'orderSum'
+                                      from OrderItem
+                                      right join Orders on OrderItem.OrderId = orders.Id
+                                      where orders.PickUpDate = @date and orders.isDeleted = 0";
+                return db.QueryFirstOrDefault<OrderItemsAndOrders>(ordersSumQuery, new { date });
+            }
+        }
+
         public Orders GetSingleOrder(int id)
         {
             using (var db = new SqlConnection(ConnectionString))
