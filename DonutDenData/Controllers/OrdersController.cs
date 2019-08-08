@@ -33,6 +33,12 @@ namespace DonutDenData.Controllers
             return Ok(_ordersRepository.GetOrdersByDate(date));
         }
 
+        [HttpGet("order-sum/{date}")]
+        public ActionResult GetOrdersSum(DateTime date)
+        {
+            return Ok(_ordersRepository.GetOrdersSum(date));
+        }
+
         [HttpGet("{id}")]
         public ActionResult GetSingleOrder(int id)
         {
